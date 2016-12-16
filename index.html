@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>random password generator</title>
+    <link rel="stylesheet" type="text/css" href="/passwd/index.css">
+  </head>
+  <body>
+    <div class="container">
+      <button class="less">&lt;</button>
+      <div class="length">20</div>
+      <button class="more">&gt;</button>
+      <button class="go">GO</button>
+      <p class="password"></p>
+    </div>
+
+    <script type="text/javascript" src="/passwd/words.js"></script>
+    <script type="text/javascript">
+      document.querySelector('button.go').onclick = function() {
+        var passwd = "";
+        let desiredLength = parseInt(document.querySelector('div.length').textContent);
+        let length = wordlist.length;
+
+        while (passwd.length < desiredLength) {
+          let randIndex = window.crypto.getRandomValues(new Uint32Array(1))[0] % length;
+          passwd = passwd + wordlist[randIndex];
+        }
+
+        document.querySelector("p.password").textContent = passwd;
+      };
+      document.querySelector('button.more').onclick = function() {
+        let desiredLength = parseInt(document.querySelector('div.length').textContent) + 1;
+
+        document.querySelector('div.length').textContent = desiredLength;
+      };
+      document.querySelector('button.less').onclick = function() {
+        let desiredLength = parseInt(document.querySelector('div.length').textContent) - 1;
+
+        document.querySelector('div.length').textContent = desiredLength;
+      };
+    </script>
+  </body>
+</html>
