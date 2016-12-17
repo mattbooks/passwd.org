@@ -6,7 +6,7 @@
   <body>
     <div class="container">
       <button class="less">&lt;</button>
-      <div class="length">20</div>
+      <div class="length">3</div>
       <button class="more">&gt;</button>
       <button class="go">GO</button>
       <p class="password"></p>
@@ -19,9 +19,9 @@
         let desiredLength = parseInt(document.querySelector('div.length').textContent);
         let length = wordlist.length;
 
-        while (passwd.length < desiredLength) {
+        for (var i = 0; i < desiredLength; i++) {
           let randIndex = window.crypto.getRandomValues(new Uint32Array(1))[0] % length;
-          passwd = passwd + wordlist[randIndex];
+          passwd = passwd + wordlist[randIndex] + "\n";
         }
 
         document.querySelector("p.password").textContent = passwd;
